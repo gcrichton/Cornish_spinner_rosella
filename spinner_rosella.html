@@ -148,11 +148,11 @@ const mutations = [
 function setClicked(m){ //mutArc1_0 mutArc2_0 mutArc3_0 etc
 
 	
-	//clear current
+	//clear current - NOTE elements is a live list so changes as classes are removed, either copy to array or work backwards
 	elements=document.getElementsByClassName('clickedM');
 
 for(element of elements){
-	console.log(element.id);
+	console.log('removing ' + element.id);
   element.classList.remove('clickedM');
   
 }
@@ -161,6 +161,7 @@ for(element of elements){
 		var ss = m.substr(7);
 		
 		document.getElementById(m).classList.add('clickedM');
+		console.log('adding ' + 'mutArc' + i + ss);
 		document.getElementById('mutArc' + i + ss).classList.add('clickedM');
 		
 	}
