@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+	<title>Mutations on an Arc</title>
+
+	<!-- D3.js -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+	
+	<!-- mut names -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap" rel="stylesheet">
+	
+	<style>
+		#chart{
+			text-align: left;
+			margin-left: -10;
+		}
+		
+		*[class^='mutArc']{ 
+			/*fill: white;*/
+			/*stroke: #AAAAAA;*/
+			
+		}
+		
+		
+		/*.mutText, .mutText2{*/
+			*[class^='mutText']{
+			/*fill: #6B6B6B;*/
+			font-size: 13px;
+			font-family: 'Zen Kurenaido', sans-serif;
+			font-weight: bold;
+			fill:white;
+			
+		}
+		
+		.mutArc {
+			/*fill:black;*/
+		}
+		
+		.mutText1 {
+			color: white;
+			fill: white;
+			font-weight: bold;
+		}
+			
+		.clickedM {
+			color:white;
+			fill:blue;
+		}
+		}
+	</style>
+  </head>
+  <body>
+
+	<div id="chart"></div>
+	
+    <script>
+		
+		//variables
+		const letters = ["Unmutated", "Soft", "Breathed", "Hard", "Mixed", "Mixed after 'th'"];
+const mutation = ["B", "Ch", "D", "G (a, e, i, y)", "G (l, r)", "Gw", "G (o, u, ro, ru)", "K", "M", "P", "T"];  
+const mutations = [
+['B','V',' ','P','F','V'],
+['Ch','J','','','',''],
+['D','Dh','','T','T','T'],
+['Ga','-','','K','H','H'],
+['Gl','-','','K','',''],
+['Gw','W','','Kw','Hw','W'],
+['Go','W','','K','Hw','W'],
+['K','G','H','','',''],
+['M','V','','','F','V'],
+['P','B','F','','',''],
+['T','D','Th','','',''],
+["Unmutated", "Soft", "Breathed", "Hard", "Mixed", "Mixed after 'th'"]
+
+]; //two dimensional array
+
+
+		
+		// Set up
+
+		var screenWidth = window.innerWidth;
+
+		var margin = {left: 20, top: 20, right: 20, bottom: 20},
+			width = Math.min(screenWidth, 500) - margin.left - margin.right,
+			height = Math.min(screenWidth, 500) - margin.top - margin.bottom;
+		//console.log('width is ' + width + ' , height is ' + height);	
+		
+		//translate is position of center		
+		var svg = d3.select("#chart").append("svg")
+					.attr("width", (width + margin.left + margin.right) + 400)
+					.attr("height", (height + margin.top + margin.bottom) + 400)
+				  .append("g").attr("class", "wrapper")
+					.attr("transform", "translate(" + (width / 1.2 + margin.left) + "," + (height / 1.2 + margin.top) + ")");
+
+		
+
+		//The start date number and end date number of the muts in a year
+		var mData = [
+			{mut: "Unmutated", 	startDeg: 0, 	endDeg: 30},
+			{mut: "Soft", startDeg: 31, 	endDeg: 58},
+			{mut: "Breathed", 	startDeg: 59, 	endDeg: 89},
+			{mut: "Hard", 	startDeg: 90, 	endDeg: 119},
+			{mut: "Mixed", 		startDeg: 120, 	endDeg: 150},
+			{mut: "Mixed (after 'th')", 	startDeg: 151, 	endDeg: 180},
+			{mut: "", 	startDeg: 181, 	endDeg: 211},
+			{mut: "", 	startDeg: 212, 	endDeg: 242},
+			{mut: "",startDeg: 243, 	endDeg: 272},
+			{mut: "", 	startDeg: 273, 	endDeg: 303},
+			{mut: "", startDeg: 306, 	endDeg: 333},
+			{mut: "",	startDeg: 334, 	endDeg: 364}
+		];
+
+		//Creates a function that makes SVG paths in the shape of arcs with the specified inner and outer radius 
+		var arc1 = d3.svg.arc()
+			.innerRadius(width*1.74/2) 
+			.outerRadius(width*1.74/2 + 30);
+			
+			var arc2 = d3.svg.arc()
+			.innerRadius(width*1.6/2) 
+			.outerRadius(width*1.6/2 + 30);
+			
+			var arc3 = d3.svg.arc()
+			.innerRadius(width*1.46/2) 
+			.outerRadius(width*1.46/2 + 30);
+		
+		
+		
+		
+		
+		var arc4 = d3.svg.arc()
+			.innerRadius(width*1.32/2) 
+			.outerRadius(width*1.32/2 + 30);
+		  
+		  var arc5 = d3.svg.arc()
+			.innerRadius(width*1.18/2) 
+			.outerRadius(width*1.18/2 + 30);
+		  
+		  var arc6 = d3.svg.arc()
+			.innerRadius(width*1.04/2) 
+			.outerRadius(width*1.04/2 + 30);
+		  
+		
+		var arc7 = d3.svg.arc()
+			.innerRadius(width*0.9/2) 
+			.outerRadius(width*0.9/2 + 30);
+		  
+		  
+		  var arc8 = d3.svg.arc()
+			.innerRadius(width*0.76/2) 
+			.outerRadius(width*0.76/2 + 30);
+			
+			 var arc9 = d3.svg.arc()
+			.innerRadius(width*0.62/2) 
+			.outerRadius(width*0.62/2 + 30)
+			//.startAngle(0)
+			//.endAngle(6.28)
+			;
+			
+			var arc10 = d3.svg.arc()
+			.innerRadius(width*0.48/2) 
+			.outerRadius(width*0.48/2 + 30);
+		  
+		  var arc11 = d3.svg.arc()
+			.innerRadius(width*0.34/2) 
+			.outerRadius(width*0.34/2 + 30);
+			
+			var arc12 = d3.svg.arc()
+			.innerRadius(width*0.20/2) 
+			.outerRadius(width*0.20/2 + 30);
+		  
+		//Creates function that will turn the mut data into start and end angles
+		var pie = d3.layout.pie()
+			.value(function(d) { return d.endDeg - d.startDeg; })
+			.padAngle(.01)
+			.sort(null);
+
+
+function setClicked(mt){ //mutArc1_0 mutArc2_0 mutArc3_0 etc
+
+	console.log('mt is ' + mt);
+	
+	//if m begins with t_ remove first two chars
+	var m = (mt.startsWith("t_")) ? mt.substr(2) : mt;
+	
+	console.log('m is ' + m);
+	//clear current - NOTE elements is a live list so changes as classes are removed, either copy to array or work backwards
+	var arrayelements=Array.prototype.slice.call(document.getElementsByClassName('clickedM'));
+var arrlength=arrayelements.length;
+//for(element of elements){
+for(var i=0;i<arrlength;i++){
+	//console.log('removing ' + element.id);
+  //element.classList.remove('clickedM');
+  arrayelements[i].classList.remove('clickedM');//setAttribute("class","blank");
+  
+}
+
+	for(i=1;i<13;i++){
+		var ss = m.substr(7);
+		
+		document.getElementById(m).classList.add('clickedM');
+		//console.log('adding ' + 'mutArc' + i + ss);
+		document.getElementById('mutArc' + i + ss).classList.add('clickedM');
+		
+	}
+}
+
+		
+		// Create the parts
+
+		//Draw the arcs themselves
+		svg.selectAll(".mutArc1")
+			.data(pie(mData))
+		   .enter().append("path")
+			.attr("class", "mutArc1")
+			.attr("id", function(d,i) { console.log('d ' +d + ', i ' + i);return "mutArc1_"+i; })
+			.attr("fill", function(d,i) { return (i < 6 ? '#404040' : 'white'); })
+			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : '#D3D3D3'); }) //FIX add this to next arc ad style appropriately
+			.attr("d", arc1)
+			.attr("onclick",'setClicked(this.id)');
+			
+			
+			svg.selectAll(".mutArc2")
+			.data(pie(mData))
+		   .enter().append("path")
+			.attr("class", "mutArc2")
+			.attr("id", function(d,i) { /*console.log('d2 ' +d + ', i ' + i);*/return "mutArc2_"+i; })
+			.attr("fill", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
+			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : '#D3D3D3'); })
+			.attr("d", arc2);
+			
+			svg.selectAll(".mutArc3")
+			.data(pie(mData))
+		   .enter().append("path")
+			.attr("class", "mutArc3")
+			.attr("id", function(d,i) { return "mutArc3_"+i; })
+			.attr("fill", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
+			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : '#D3D3D3'); })
+			.attr("d", arc3);
+			
+			svg.selectAll(".mutArc4")
+			.data(pie(mData))
+		   .enter().append("path")
+			.attr("class", "mutArc4")
+			.attr("id", function(d,i) { return "mutArc4_"+i; })
+			.attr("fill", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
+			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : '#D3D3D3'); })
+			.attr("d", arc4);
+			
+			svg.selectAll(".mutArc5")
+			.data(pie(mData))
+		   .enter().append("path")
+			.attr("class", "mutArc5")
+			.attr("id", function(d,i) { return "mutArc5_"+i; })
+			.attr("fill", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
+			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : '#D3D3D3'); })
+			.attr("d", arc5);
+			
+			svg.selectAll(".mutArc6")
+			.data(pie(mData))
+		   .enter().append("path")
+			.attr("class", "mutArc6")
+			.attr("id", function(d,i) { return "mutArc6_"+i; })
+			.attr("fill", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
+			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : '#D3D3D3'); })
+			.attr("d", arc6);
+			
+			svg.selectAll(".mutArc7")
+			.data(pie(mData))
+		   .enter().append("path")
+			.attr("class", "mutArc7")
+			.attr("id", function(d,i) { return "mutArc7_"+i; })
+			.attr("fill", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
+			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : '#D3D3D3'); })
+			.attr("d", arc7);
+			
+			svg.selectAll(".mutArc8")
+			.data(pie(mData))
+		   .enter().append("path")
+			.attr("class", "mutArc8")
+			.attr("id", function(d,i) { return "mutArc8_"+i; })
+			.attr("fill", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
+			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : '#D3D3D3'); })
+			.attr("d", arc8);
+			
+			svg.selectAll(".mutArc9")
+			.data(pie(mData))
+		   .enter().append("path")
+			.attr("class", "mutArc9")
+			.attr("id", function(d,i) { return "mutArc9_"+i; })
+			.attr("fill", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
+			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : '#D3D3D3'); })
+			.attr("d", arc9);
+			
+			svg.selectAll(".mutArc10")
+			.data(pie(mData))
+		   .enter().append("path")
+			.attr("class", "mutArc10")
+			.attr("id", function(d,i) { return "mutArc10_"+i; })
+			.attr("fill", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
+			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : '#D3D3D3'); })
+			.attr("d", arc10);
+			
+			//FIX merge all of these into a loop
+			svg.selectAll(".mutArc11")
+			.data(pie(mData))
+		   .enter().append("path")
+			.attr("class", "mutArc11")
+			.attr("id", function(d,i) { return "mutArc11_"+i; })
+			.attr("fill", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
+			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : '#D3D3D3'); })
+			.attr("d", arc11);
+			
+			svg.selectAll(".mutArc12")
+			.data(pie(mData))
+		   .enter().append("path")
+			.attr("class", "mutArc12")
+			.attr("id", function(d,i) { return "mutArc12_"+i; })
+			.attr("fill", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
+			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : '#D3D3D3'); })
+			.attr("d", arc12);
+			
+			
+			
+		//Append the mut names within the arcs
+		svg.selectAll(".mutText1")
+			.data(mData)
+		   .enter().append("text")
+			.attr("class", "mutText1")
+			.attr("x", 5) //Move the text from the start angle of the arc
+			.attr("dy", 18) //Move the text down
+		   .append("textPath")
+			.attr("xlink:href",function(d,i){return "#mutArc1_"+i;})
+			.attr("id",function(d,i){console.log('id is ' + this);return "t_mutArc1_"+i;})
+			.attr("onclick",'setClicked(this.id)')
+			.text(function(d,i){return mutations[11][i];});	
+			
+			svg.selectAll(".mutText2")
+			.data(mData) //FIX change this to mutation array
+		   .enter().append("text")
+			.attr("class", "mutText2")
+			.attr("x", 5) //Move the text from the start angle of the arc
+			.attr("dy", 18) //Move the text down
+		   .append("textPath")
+			.attr("xlink:href",function(d,i){return "#mutArc2_"+i;})
+			.text(function(d,i){return mutations[0][i];});	
+			
+			svg.selectAll(".mutText3")
+			.data(mData)
+		   .enter().append("text")
+			.attr("class", "mutText3")
+			.attr("x", 5) //Move the text from the start angle of the arc
+			.attr("dy", 18) //Move the text down
+		   .append("textPath")
+			.attr("xlink:href",function(d,i){return "#mutArc3_"+i;})
+			.text(function(d,i){return mutations[1][i];});		
+			
+			svg.selectAll(".mutText4")
+			.data(mData)
+		   .enter().append("text")
+			.attr("class", "mutText4")
+			.attr("x", 5) //Move the text from the start angle of the arc
+			.attr("dy", 18) //Move the text down
+		   .append("textPath")
+			.attr("xlink:href",function(d,i){return "#mutArc4_"+i;})
+			.text(function(d,i){return mutations[2][i];});	
+			
+			svg.selectAll(".mutText5")
+			.data(mData)
+		   .enter().append("text")
+			.attr("class", "mutText5")
+			.attr("x", 5) //Move the text from the start angle of the arc
+			.attr("dy", 18) //Move the text down
+		   .append("textPath")
+			.attr("xlink:href",function(d,i){return "#mutArc5_"+i;})
+			.text(function(d,i){return mutations[3][i];});	
+			
+			svg.selectAll(".mutText6")
+			.data(mData)
+		   .enter().append("text")
+			.attr("class", "mutText6")
+			.attr("x", 5) //Move the text from the start angle of the arc
+			.attr("dy", 18) //Move the text down
+		   .append("textPath")
+			.attr("xlink:href",function(d,i){return "#mutArc6_"+i;})
+			.text(function(d,i){return mutations[4][i];});	
+			
+			
+			svg.selectAll(".mutText7")
+			.data(mData)
+		   .enter().append("text")
+			.attr("class", "mutText7")
+			.attr("x", 5) //Move the text from the start angle of the arc
+			.attr("dy", 18) //Move the text down
+		   .append("textPath")
+			.attr("xlink:href",function(d,i){return "#mutArc7_"+i;})
+			.text(function(d,i){return mutations[5][i];});
+			
+			svg.selectAll(".mutText8")
+			.data(mData)
+		   .enter().append("text")
+			.attr("class", "mutText8")
+			.attr("x", 5) //Move the text from the start angle of the arc
+			.attr("dy", 18) //Move the text down
+		   .append("textPath")
+			.attr("xlink:href",function(d,i){return "#mutArc8_"+i;})
+			.text(function(d,i){return mutations[6][i];});
+			
+			svg.selectAll(".mutText9")
+			.data(mData)
+		   .enter().append("text")
+			.attr("class", "mutText9")
+			.attr("x", 5) //Move the text from the start angle of the arc
+			.attr("dy", 18) //Move the text down
+		   .append("textPath")
+			.attr("xlink:href",function(d,i){return "#mutArc9_"+i;})
+			.text(function(d,i){return mutations[7][i];});
+			
+			svg.selectAll(".mutText10")
+			.data(mData)
+		   .enter().append("text")
+			.attr("class", "mutText10")
+			.attr("x", 5) //Move the text from the start angle of the arc
+			.attr("dy", 18) //Move the text down
+		   .append("textPath")
+			.attr("xlink:href",function(d,i){return "#mutArc10_"+i;})
+			.text(function(d,i){return mutations[8][i];});
+			
+			svg.selectAll(".mutText11")
+			.data(mData)
+		   .enter().append("text")
+			.attr("class", "mutText11")
+			.attr("x", 5) //Move the text from the start angle of the arc
+			.attr("dy", 18) //Move the text down
+		   .append("textPath")
+			.attr("xlink:href",function(d,i){return "#mutArc11_"+i;})
+			.text(function(d,i){return mutations[9][i];});
+			
+			svg.selectAll(".mutText12")
+			.data(mData)
+		   .enter().append("text")
+			.attr("class", "mutText12")
+			.attr("x", 5) //Move the text from the start angle of the arc
+			.attr("dy", 18) //Move the text down
+		   .append("textPath")
+			.attr("xlink:href",function(d,i){return "#mutArc12_"+i;})
+			.text(function(d,i){return mutations[10][i];});
+			
+			
+	</script>
+	
+  </body>
+</html>
