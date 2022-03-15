@@ -238,6 +238,7 @@ for(var i=0;i<arrlength;i++){
 			.attr("dy", 18) //Move the text down
 		   .append("textPath")
 			.attr("xlink:href",function(d,i){return "#mutArc1_"+i;})
+			.attr("id",function(d,i){return "t_mutArc1_"+i;});
 			.attr("onclick",'setClicked(this.id)')
 			.text(function(d,i){return mutation[i];});	
 			
