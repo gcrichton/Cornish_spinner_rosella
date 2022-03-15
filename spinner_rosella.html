@@ -31,6 +31,7 @@
 			font-size: 13px;
 			font-family: 'Zen Kurenaido', sans-serif;
 			font-weight: bold;
+			fill:white;
 			
 		}
 		
@@ -45,7 +46,7 @@
 		}
 			
 		.clickedM {
-			color:red;
+			color:white;
 			fill:blue;
 		}
 		}
@@ -183,7 +184,7 @@ for(var i=0;i<arrlength;i++){
 		   .enter().append("path")
 			.attr("class", "mutArc1")
 			.attr("id", function(d,i) { console.log('d ' +d + ', i ' + i);return "mutArc1_"+i; })
-			.attr("fill", function(d,i) { return (i < 11 ? '#404040' : 'white'); })
+			.attr("fill", function(d,i) { return (i < 11 ? '#404040' : 'black'); })
 			.attr("stroke", function(d,i) { return (i < 11 ? '#AAAAAA' : '#D3D3D3'); }) //FIX add this to next arc ad style appropriately
 			.attr("d", arc1)
 			.attr("onclick",'setClicked(this.id)');
@@ -194,7 +195,7 @@ for(var i=0;i<arrlength;i++){
 		   .enter().append("path")
 			.attr("class", "mutArc2")
 			.attr("id", function(d,i) { console.log('d2 ' +d + ', i ' + i);return "mutArc2_"+i; })
-			.attr("fill", function(d,i) { return (i < 11 ? '#AAAAAA' : 'white'); })
+			.attr("fill", function(d,i) { return (i < 11 ? '#AAAAAA' : 'black'); })
 			.attr("stroke", function(d,i) { return (i < 11 ? '#AAAAAA' : '#D3D3D3'); })
 			.attr("d", arc2);
 			
@@ -203,7 +204,7 @@ for(var i=0;i<arrlength;i++){
 		   .enter().append("path")
 			.attr("class", "mutArc3")
 			.attr("id", function(d,i) { return "mutArc3_"+i; })
-			.attr("fill", function(d,i) { return (i < 11 ? '#AAAAAA' : 'white'); })
+			.attr("fill", function(d,i) { return (i < 11 ? '#AAAAAA' : 'black'); })
 			.attr("stroke", function(d,i) { return (i < 11 ? '#AAAAAA' : '#D3D3D3'); })
 			.attr("d", arc3);
 			
@@ -212,7 +213,7 @@ for(var i=0;i<arrlength;i++){
 		   .enter().append("path")
 			.attr("class", "mutArc4")
 			.attr("id", function(d,i) { return "mutArc4_"+i; })
-			.attr("fill", function(d,i) { return (i < 11 ? '#AAAAAA' : 'white'); })
+			.attr("fill", function(d,i) { return (i < 11 ? '#AAAAAA' : 'black'); })
 			.attr("stroke", function(d,i) { return (i < 11 ? '#AAAAAA' : '#D3D3D3'); })
 			.attr("d", arc4);
 			
@@ -221,7 +222,7 @@ for(var i=0;i<arrlength;i++){
 		   .enter().append("path")
 			.attr("class", "mutArc5")
 			.attr("id", function(d,i) { return "mutArc5_"+i; })
-			.attr("fill", function(d,i) { return (i < 11 ? '#AAAAAA' : 'white'); })
+			.attr("fill", function(d,i) { return (i < 11 ? '#AAAAAA' : 'black'); })
 			.attr("stroke", function(d,i) { return (i < 11 ? '#AAAAAA' : '#D3D3D3'); })
 			.attr("d", arc5);
 			
@@ -230,7 +231,7 @@ for(var i=0;i<arrlength;i++){
 		   .enter().append("path")
 			.attr("class", "mutArc6")
 			.attr("id", function(d,i) { return "mutArc6_"+i; })
-			.attr("fill", function(d,i) { return (i < 11 ? '#AAAAAA' : 'white'); })
+			.attr("fill", function(d,i) { return (i < 11 ? '#AAAAAA' : 'black'); })
 			.attr("stroke", function(d,i) { return (i < 11 ? '#AAAAAA' : '#D3D3D3'); })
 			.attr("d", arc6);
 			
