@@ -147,7 +147,7 @@ const mutations = [
 
 function setClicked(m){ //mutArc1_0 mutArc2_0 mutArc3_0 etc
 
-	
+	console.log('m is ' + m);
 	//clear current - NOTE elements is a live list so changes as classes are removed, either copy to array or work backwards
 	var arrayelements=Array.prototype.slice.call(document.getElementsByClassName('clickedM'));
 var arrlength=arrayelements.length;
@@ -163,7 +163,7 @@ for(var i=0;i<arrlength;i++){
 		var ss = m.substr(7);
 		
 		document.getElementById(m).classList.add('clickedM');
-		console.log('adding ' + 'mutArc' + i + ss);
+		//console.log('adding ' + 'mutArc' + i + ss);
 		document.getElementById('mutArc' + i + ss).classList.add('clickedM');
 		
 	}
@@ -238,6 +238,7 @@ for(var i=0;i<arrlength;i++){
 			.attr("dy", 18) //Move the text down
 		   .append("textPath")
 			.attr("xlink:href",function(d,i){return "#mutArc1_"+i;})
+			.attr("onclick",'setClicked(this.id)')
 			.text(function(d,i){return mutation[i];});	
 			
 			svg.selectAll(".mutText2")
