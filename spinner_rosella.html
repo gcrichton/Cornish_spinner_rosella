@@ -145,8 +145,13 @@ const mutations = [
 			.sort(null);
 
 
-function setClicked(m){ //mutArc1_0 mutArc2_0 mutArc3_0 etc
+function setClicked(mt){ //mutArc1_0 mutArc2_0 mutArc3_0 etc
 
+	console.log('m is ' + m);
+	
+	//if m begins with t_ remove first two chars
+	var m = (m.startsWith("t_")) ? mt.substr(2) : mt;
+	
 	console.log('m is ' + m);
 	//clear current - NOTE elements is a live list so changes as classes are removed, either copy to array or work backwards
 	var arrayelements=Array.prototype.slice.call(document.getElementsByClassName('clickedM'));
@@ -238,7 +243,7 @@ for(var i=0;i<arrlength;i++){
 			.attr("dy", 18) //Move the text down
 		   .append("textPath")
 			.attr("xlink:href",function(d,i){return "#mutArc1_"+i;})
-			.attr("id",function(d,i){return "t_mutArc1_"+i;});
+			.attr("id",function(d,i){return "t_mutArc1_"+i;})
 			.attr("onclick",'setClicked(this.id)')
 			.text(function(d,i){return mutation[i];});	
 			
