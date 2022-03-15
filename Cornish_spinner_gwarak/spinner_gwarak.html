@@ -89,11 +89,12 @@ const mutations = [
 		//console.log('width is ' + width + ' , height is ' + height);	
 		
 		//translate is position of center		
+		//rotate to horizontal
 		var svg = d3.select("#chart").append("svg")
-					.attr("width", (width + margin.left + margin.right) + 400)
+					.attr("width", (width + margin.left + margin.right) + 500)
 					.attr("height", (height + margin.top + margin.bottom) + 400)
 				  .append("g").attr("class", "wrapper")
-					.attr("transform", "translate(" + (width / 1.2 + margin.left) + "," + (height / 1.2 + margin.top) + ")");
+					.attr("transform", "translate(" + (width / 1.1 + margin.left) + "," + (height / 1.1 + margin.top) + ") rotate(-90)");
 
 		
 
@@ -217,7 +218,7 @@ for(var i=0;i<arrlength;i++){
 			.attr("class", "mutArc1")
 			.attr("id", function(d,i) { /*console.log('d ' +d + ', i ' + i);*/return "mutArc1_"+i; })
 			.attr("fill", function(d,i) { return (i < 6 ? '#404040' : 'white'); })
-			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : '#D3D3D3'); }) //FIX add this to next arc ad style appropriately
+			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); }) //FIX add this to next arc ad style appropriately
 			.attr("d", arc1)
 			.attr("onclick",'setClicked(this.id)');
 			
@@ -228,7 +229,7 @@ for(var i=0;i<arrlength;i++){
 			.attr("class", "mutArc2")
 			.attr("id", function(d,i) { /*console.log('d2 ' +d + ', i ' + i);*/return "mutArc2_"+i; })
 			.attr("fill", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
-			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : '#D3D3D3'); })
+			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
 			.attr("d", arc2);
 			
 			svg.selectAll(".mutArc3")
@@ -237,7 +238,7 @@ for(var i=0;i<arrlength;i++){
 			.attr("class", "mutArc3")
 			.attr("id", function(d,i) { return "mutArc3_"+i; })
 			.attr("fill", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
-			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : '#D3D3D3'); })
+			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
 			.attr("d", arc3);
 			
 			svg.selectAll(".mutArc4")
@@ -246,7 +247,7 @@ for(var i=0;i<arrlength;i++){
 			.attr("class", "mutArc4")
 			.attr("id", function(d,i) { return "mutArc4_"+i; })
 			.attr("fill", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
-			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : '#D3D3D3'); })
+			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
 			.attr("d", arc4);
 			
 			svg.selectAll(".mutArc5")
@@ -255,7 +256,7 @@ for(var i=0;i<arrlength;i++){
 			.attr("class", "mutArc5")
 			.attr("id", function(d,i) { return "mutArc5_"+i; })
 			.attr("fill", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
-			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : '#D3D3D3'); })
+			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
 			.attr("d", arc5);
 			
 			svg.selectAll(".mutArc6")
@@ -264,7 +265,7 @@ for(var i=0;i<arrlength;i++){
 			.attr("class", "mutArc6")
 			.attr("id", function(d,i) { return "mutArc6_"+i; })
 			.attr("fill", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
-			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : '#D3D3D3'); })
+			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
 			.attr("d", arc6);
 			
 			svg.selectAll(".mutArc7")
@@ -273,7 +274,7 @@ for(var i=0;i<arrlength;i++){
 			.attr("class", "mutArc7")
 			.attr("id", function(d,i) { return "mutArc7_"+i; })
 			.attr("fill", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
-			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : '#D3D3D3'); })
+			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
 			.attr("d", arc7);
 			
 			svg.selectAll(".mutArc8")
@@ -282,7 +283,7 @@ for(var i=0;i<arrlength;i++){
 			.attr("class", "mutArc8")
 			.attr("id", function(d,i) { return "mutArc8_"+i; })
 			.attr("fill", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
-			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : '#D3D3D3'); })
+			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
 			.attr("d", arc8);
 			
 			svg.selectAll(".mutArc9")
@@ -291,7 +292,7 @@ for(var i=0;i<arrlength;i++){
 			.attr("class", "mutArc9")
 			.attr("id", function(d,i) { return "mutArc9_"+i; })
 			.attr("fill", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
-			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : '#D3D3D3'); })
+			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
 			.attr("d", arc9);
 			
 			svg.selectAll(".mutArc10")
@@ -300,7 +301,7 @@ for(var i=0;i<arrlength;i++){
 			.attr("class", "mutArc10")
 			.attr("id", function(d,i) { return "mutArc10_"+i; })
 			.attr("fill", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
-			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : '#D3D3D3'); })
+			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
 			.attr("d", arc10);
 			
 			//FIX merge all of these into a loop
@@ -310,7 +311,7 @@ for(var i=0;i<arrlength;i++){
 			.attr("class", "mutArc11")
 			.attr("id", function(d,i) { return "mutArc11_"+i; })
 			.attr("fill", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
-			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : '#D3D3D3'); })
+			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
 			.attr("d", arc11);
 			
 			svg.selectAll(".mutArc12")
@@ -319,7 +320,7 @@ for(var i=0;i<arrlength;i++){
 			.attr("class", "mutArc12")
 			.attr("id", function(d,i) { return "mutArc12_"+i; })
 			.attr("fill", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
-			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : '#D3D3D3'); })
+			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
 			.attr("d", arc12);
 			
 			
