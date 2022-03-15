@@ -194,7 +194,7 @@ for(var i=0;i<arrlength;i++){
 			.data(pie(mData))
 		   .enter().append("path")
 			.attr("class", "mutArc2")
-			.attr("id", function(d,i) { console.log('d2 ' +d + ', i ' + i);return "mutArc2_"+i; })
+			.attr("id", function(d,i) { /*console.log('d2 ' +d + ', i ' + i);*/return "mutArc2_"+i; })
 			.attr("fill", function(d,i) { return (i < 11 ? '#AAAAAA' : 'black'); })
 			.attr("stroke", function(d,i) { return (i < 11 ? '#AAAAAA' : '#D3D3D3'); })
 			.attr("d", arc2);
@@ -246,7 +246,7 @@ for(var i=0;i<arrlength;i++){
 			.attr("xlink:href",function(d,i){return "#mutArc1_"+i;})
 			.attr("id",function(d,i){console.log('id is ' + this);return "t_mutArc1_"+i;})
 			.attr("onclick",'setClicked(this.id)')
-			.text(function(d,i){return mutation[i];});	
+			.text(function(d,i){return mutations[i][0];});	
 			
 			svg.selectAll(".mutText2")
 			.data(mData) //FIX change this to mutation array
