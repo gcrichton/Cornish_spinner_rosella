@@ -149,11 +149,13 @@ function setClicked(m){ //mutArc1_0 mutArc2_0 mutArc3_0 etc
 
 	
 	//clear current - NOTE elements is a live list so changes as classes are removed, either copy to array or work backwards
-	elements=document.getElementsByClassName('clickedM');
-
-for(element of elements){
-	console.log('removing ' + element.id);
-  element.classList.remove('clickedM');
+	var arrayelements=Array.prototype.slice.call(document.getElementsByClassName('clickedM'));
+var arrlength=arrayelements.length;
+//for(element of elements){
+or(var i=0;i<arrlength;i++){
+	//console.log('removing ' + element.id);
+  //element.classList.remove('clickedM');
+  arrayelements[i].classList.remove('clickedM')//setAttribute("class","blank");
   
 }
 
