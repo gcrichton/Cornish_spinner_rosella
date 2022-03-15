@@ -180,12 +180,12 @@ const mutations = [
 
 function setClicked(mt){ //mutArc1_0 mutArc2_0 mutArc3_0 etc
 
-	console.log('mt is ' + mt);
+	//console.log('mt is ' + mt);
 	
 	//if m begins with t_ remove first two chars
 	var m = (mt.startsWith("t_")) ? mt.substr(2) : mt;
 	
-	console.log('m is ' + m);
+	/*console.log('m is ' + m);*/
 	//clear current - NOTE elements is a live list so changes as classes are removed, either copy to array or work backwards
 	var arrayelements=Array.prototype.slice.call(document.getElementsByClassName('clickedM'));
 var arrlength=arrayelements.length;
@@ -215,7 +215,7 @@ for(var i=0;i<arrlength;i++){
 			.data(pie(mData))
 		   .enter().append("path")
 			.attr("class", "mutArc1")
-			.attr("id", function(d,i) { console.log('d ' +d + ', i ' + i);return "mutArc1_"+i; })
+			.attr("id", function(d,i) { /*console.log('d ' +d + ', i ' + i);*/return "mutArc1_"+i; })
 			.attr("fill", function(d,i) { return (i < 6 ? '#404040' : 'white'); })
 			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : '#D3D3D3'); }) //FIX add this to next arc ad style appropriately
 			.attr("d", arc1)
@@ -333,7 +333,7 @@ for(var i=0;i<arrlength;i++){
 			.attr("dy", 18) //Move the text down
 		   .append("textPath")
 			.attr("xlink:href",function(d,i){return "#mutArc1_"+i;})
-			.attr("id",function(d,i){console.log('id is ' + this);return "t_mutArc1_"+i;})
+			.attr("id",function(d,i){/*console.log('id is ' + this);*/return "t_mutArc1_"+i;})
 			.attr("onclick",'setClicked(this.id)')
 			.text(function(d,i){return mutations[11][i];});	
 			
