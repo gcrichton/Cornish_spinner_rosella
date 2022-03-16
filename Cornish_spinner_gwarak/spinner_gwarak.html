@@ -179,14 +179,21 @@ const mutations = [
 			.sort(null);
 
 
-function setClicked(mt){ //mutArc1_0 mutArc2_0 mutArc3_0 etc
+function setClicked(mt,n){ //mutArc1_0 mutArc2_0 mutArc3_0 etc
+	//n is 0 if title (mutation), 1 if letter: if 0 colour vertically, if 1 colour horizontally
+			
 
 	//console.log('mt is ' + mt);
 	
 	//if m begins with t_ remove first two chars
 	var m = (mt.startsWith("t_")) ? mt.substr(2) : mt;
 	
-	/*console.log('m is ' + m);*/
+	var ma = m.substr(6,2); //get number from id - may be two digits to take on plus _ or two digits then trim
+	//console.log('ma is ' + ma);
+	var mb = (ma.endsWith("_")) ? ma.substr(0,1) : ma;
+	//console.log('mb is ' + mb);
+	
+	//console.log('m is ' + m);
 	//clear current - NOTE elements is a live list so changes as classes are removed, either copy to array or work backwards
 	var arrayelements=Array.prototype.slice.call(document.getElementsByClassName('clickedM'));
 var arrlength=arrayelements.length;
@@ -196,14 +203,29 @@ for(var i=0;i<arrlength;i++){
   //element.classList.remove('clickedM');
   arrayelements[i].classList.remove('clickedM');//setAttribute("class","blank");
   
+  
+  
 }
+
+
 
 	for(i=1;i<13;i++){
 		var ss = m.substr(7);
 		
+		//console.log('foo is ' + 'mutArc' + i + ss);
+//console.log('bar is ' + 'mutArc' + mb  + '_' + i);
+		
+		if(n == 0){
 		document.getElementById(m).classList.add('clickedM');
 		//console.log('adding ' + 'mutArc' + i + ss);
 		document.getElementById('mutArc' + i + ss).classList.add('clickedM');
+	}else if(i < 6){
+		document.getElementById(m).classList.add('clickedM'); //FIX make this a different coloured class
+		//console.log('adding ' + 'mutArc' + i + ss);
+		document.getElementById('mutArc' + mb + '_' + i).classList.add('clickedM');
+	}else{
+		//nothing
+	}
 		
 	}
 }
@@ -220,7 +242,7 @@ for(var i=0;i<arrlength;i++){
 			.attr("fill", function(d,i) { return (i < 6 ? '#404040' : 'white'); })
 			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); }) //FIX add this to next arc ad style appropriately
 			.attr("d", arc1)
-			.attr("onclick",'setClicked(this.id)');
+			.attr("onclick",'setClicked(this.id,0)'); //0 if title (mutation), 1 if letter: if 0 colour vertically, if 1 colour horizontally
 			
 			
 			svg.selectAll(".mutArc2")
@@ -230,7 +252,8 @@ for(var i=0;i<arrlength;i++){
 			.attr("id", function(d,i) { /*console.log('d2 ' +d + ', i ' + i);*/return "mutArc2_"+i; })
 			.attr("fill", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
 			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
-			.attr("d", arc2);
+			.attr("d", arc2)
+			.attr("onclick",'setClicked(this.id,1)');;
 			
 			svg.selectAll(".mutArc3")
 			.data(pie(mData))
@@ -335,7 +358,7 @@ for(var i=0;i<arrlength;i++){
 		   .append("textPath")
 			.attr("xlink:href",function(d,i){return "#mutArc1_"+i;})
 			.attr("id",function(d,i){/*console.log('id is ' + this);*/return "t_mutArc1_"+i;})
-			.attr("onclick",'setClicked(this.id)')
+			.attr("onclick",'setClicked(this.id,0)')
 			.text(function(d,i){return mutations[11][i];});	
 			
 			svg.selectAll(".mutText2")
