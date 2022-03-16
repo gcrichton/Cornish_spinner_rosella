@@ -49,6 +49,10 @@
 			color:white;
 			fill:blue;
 		}
+.clickedMR {
+			color:black;
+			fill:red;
+		}
 		}
 	</style>
   </head>
@@ -146,14 +150,16 @@ const mutations = [
 			.sort(null);
 
 
-function setClicked(mt){ //mutArc1_0 mutArc2_0 mutArc3_0 etc
+function setClicked(mt,n){ //mutArc1_0 mutArc2_0 mutArc3_0 etc
 
-	console.log('mt is ' + mt);
+	
 	
 	//if m begins with t_ remove first two chars
 	var m = (mt.startsWith("t_")) ? mt.substr(2) : mt;
+	var ma = m.substr(6,2); //get number from id - may be two digits to take on plus _ or two digits then trim
+	var mb = (ma.endsWith("_")) ? ma.substr(0,1) : ma;
 	
-	console.log('m is ' + m);
+	
 	//clear current - NOTE elements is a live list so changes as classes are removed, either copy to array or work backwards
 	var arrayelements=Array.prototype.slice.call(document.getElementsByClassName('clickedM'));
 var arrlength=arrayelements.length;
@@ -162,16 +168,32 @@ for(var i=0;i<arrlength;i++){
 	//console.log('removing ' + element.id);
   //element.classList.remove('clickedM');
   arrayelements[i].classList.remove('clickedM');//setAttribute("class","blank");
-  
+  }
+
+//remove red class
+var arrayelementsR=Array.prototype.slice.call(document.getElementsByClassName('clickedMR'));
+var arrlengthR=arrayelementsR.length;
+for(var i=0;i<arrlengthR;i++){	
+  arrayelementsR[i].classList.remove('clickedMR');
 }
 
-	for(i=1;i<7;i++){
+	for(i=1;i<11;i++){
 		var ss = m.substr(7);
 		
+if(n == 0){
+if(i < 7){
 		document.getElementById(m).classList.add('clickedM');
-		//console.log('adding ' + 'mutArc' + i + ss);
+		console.log('adding ' + 'mutArc' + i + ss);
 		document.getElementById('mutArc' + i + ss).classList.add('clickedM');
-		
+}
+	}else if(i < 11){
+		document.getElementById(m).classList.add('clickedM'); //FIX make this a different coloured class
+		//console.log('addingM ' + 'mutArc' + i + ss);
+		document.getElementById('mutArc' + mb + '_' + i).classList.add('clickedM');
+		document.getElementById('mutArc' + mb + '_' + 11).classList.add('clickedMR');
+	}else{
+		//nothing
+	}	
 	}
 }
 
@@ -187,7 +209,7 @@ for(var i=0;i<arrlength;i++){
 			.attr("fill", function(d,i) { return (i < 11 ? '#404040' : 'black'); })
 			.attr("stroke", function(d,i) { return (i < 11 ? '#AAAAAA' : '#D3D3D3'); }) //FIX add this to next arc ad style appropriately
 			.attr("d", arc1)
-			.attr("onclick",'setClicked(this.id)');
+			.attr("onclick",'setClicked(this.id,0)');
 			
 			
 			svg.selectAll(".mutArc2")
@@ -197,7 +219,8 @@ for(var i=0;i<arrlength;i++){
 			.attr("id", function(d,i) { /*console.log('d2 ' +d + ', i ' + i);*/return "mutArc2_"+i; })
 			.attr("fill", function(d,i) { return (i < 11 ? '#AAAAAA' : 'black'); })
 			.attr("stroke", function(d,i) { return (i < 11 ? '#AAAAAA' : '#D3D3D3'); })
-			.attr("d", arc2);
+			.attr("d", arc2)
+.attr("onclick",'setClicked(this.id,1)');
 			
 			svg.selectAll(".mutArc3")
 			.data(pie(mData))
@@ -206,7 +229,8 @@ for(var i=0;i<arrlength;i++){
 			.attr("id", function(d,i) { return "mutArc3_"+i; })
 			.attr("fill", function(d,i) { return (i < 11 ? '#AAAAAA' : 'black'); })
 			.attr("stroke", function(d,i) { return (i < 11 ? '#AAAAAA' : '#D3D3D3'); })
-			.attr("d", arc3);
+			.attr("d", arc3)
+.attr("onclick",'setClicked(this.id,1)');
 			
 			svg.selectAll(".mutArc4")
 			.data(pie(mData))
@@ -215,7 +239,8 @@ for(var i=0;i<arrlength;i++){
 			.attr("id", function(d,i) { return "mutArc4_"+i; })
 			.attr("fill", function(d,i) { return (i < 11 ? '#AAAAAA' : 'black'); })
 			.attr("stroke", function(d,i) { return (i < 11 ? '#AAAAAA' : '#D3D3D3'); })
-			.attr("d", arc4);
+			.attr("d", arc4)
+.attr("onclick",'setClicked(this.id,1)');
 			
 			svg.selectAll(".mutArc5")
 			.data(pie(mData))
@@ -224,7 +249,8 @@ for(var i=0;i<arrlength;i++){
 			.attr("id", function(d,i) { return "mutArc5_"+i; })
 			.attr("fill", function(d,i) { return (i < 11 ? '#AAAAAA' : 'black'); })
 			.attr("stroke", function(d,i) { return (i < 11 ? '#AAAAAA' : '#D3D3D3'); })
-			.attr("d", arc5);
+			.attr("d", arc5)
+.attr("onclick",'setClicked(this.id,1)');
 			
 			svg.selectAll(".mutArc6")
 			.data(pie(mData))
@@ -233,7 +259,8 @@ for(var i=0;i<arrlength;i++){
 			.attr("id", function(d,i) { return "mutArc6_"+i; })
 			.attr("fill", function(d,i) { return (i < 11 ? '#AAAAAA' : 'black'); })
 			.attr("stroke", function(d,i) { return (i < 11 ? '#AAAAAA' : '#D3D3D3'); })
-			.attr("d", arc6);
+			.attr("d", arc6)
+.attr("onclick",'setClicked(this.id,1)');
 			
 		//Append the mut names within the arcs
 		svg.selectAll(".mutText1")
@@ -245,7 +272,7 @@ for(var i=0;i<arrlength;i++){
 		   .append("textPath")
 			.attr("xlink:href",function(d,i){return "#mutArc1_"+i;})
 			.attr("id",function(d,i){console.log('id is ' + this);return "t_mutArc1_"+i;})
-			.attr("onclick",'setClicked(this.id)')
+			.attr("onclick",'setClicked(this.id,0)')
 			.text(function(d,i){return mutations[i][0];});	
 			
 			svg.selectAll(".mutText2")
@@ -256,6 +283,8 @@ for(var i=0;i<arrlength;i++){
 			.attr("dy", 18) //Move the text down
 		   .append("textPath")
 			.attr("xlink:href",function(d,i){return "#mutArc2_"+i;})
+.attr("id",function(d,i){return "t_mutArc2_"+i;})
+			.attr("onclick",'setClicked(this.id,1)')
 			.text(function(d,i){return mutations[i][1];});	
 			
 			svg.selectAll(".mutText3")
@@ -266,6 +295,8 @@ for(var i=0;i<arrlength;i++){
 			.attr("dy", 18) //Move the text down
 		   .append("textPath")
 			.attr("xlink:href",function(d,i){return "#mutArc3_"+i;})
+.attr("id",function(d,i){return "t_mutArc3_"+i;})
+			.attr("onclick",'setClicked(this.id,1)')
 			.text(function(d,i){return mutations[i][2];});		
 			
 			svg.selectAll(".mutText4")
@@ -276,6 +307,8 @@ for(var i=0;i<arrlength;i++){
 			.attr("dy", 18) //Move the text down
 		   .append("textPath")
 			.attr("xlink:href",function(d,i){return "#mutArc4_"+i;})
+.attr("id",function(d,i){return "t_mutArc4_"+i;})
+			.attr("onclick",'setClicked(this.id,1)')
 			.text(function(d,i){return mutations[i][3];});	
 			
 			svg.selectAll(".mutText5")
@@ -286,6 +319,8 @@ for(var i=0;i<arrlength;i++){
 			.attr("dy", 18) //Move the text down
 		   .append("textPath")
 			.attr("xlink:href",function(d,i){return "#mutArc5_"+i;})
+.attr("id",function(d,i){return "t_mutArc5_"+i;})
+			.attr("onclick",'setClicked(this.id,1)')
 			.text(function(d,i){return mutations[i][4];});	
 			
 			svg.selectAll(".mutText6")
@@ -296,6 +331,8 @@ for(var i=0;i<arrlength;i++){
 			.attr("dy", 18) //Move the text down
 		   .append("textPath")
 			.attr("xlink:href",function(d,i){return "#mutArc6_"+i;})
+.attr("id",function(d,i){return "t_mutArc6_"+i;})
+			.attr("onclick",'setClicked(this.id,1)')
 			.text(function(d,i){return mutations[i][5];});	
 	</script>
 	
