@@ -49,7 +49,7 @@
 			color:white;
 			fill:blue;
 		}
-		.clickedMY {
+		.clickedMR {
 			color:black;
 			fill:red;
 		}
@@ -206,9 +206,13 @@ for(var i=0;i<arrlength;i++){
 	//console.log('removing ' + element.id);
   //element.classList.remove('clickedM');
   arrayelements[i].classList.remove('clickedM');//setAttribute("class","blank");
-  
-  
-  
+}
+
+//remove red class
+var arrayelementsR=Array.prototype.slice.call(document.getElementsByClassName('clickedMR'));
+var arrlengthR=arrayelementsR.length;
+for(var i=0;i<arrlengthR;i++){	
+  arrayelementsR[i].classList.remove('clickedMR');
 }
 
 
@@ -227,7 +231,7 @@ for(var i=0;i<arrlength;i++){
 		document.getElementById(m).classList.add('clickedM'); //FIX make this a different coloured class
 		console.log('adding ' + 'mutArc' + i + ss);
 		document.getElementById('mutArc' + mb + '_' + i).classList.add('clickedM');
-		document.getElementById('mutArc' + mb + '_' + 0).classList.add('clickedMY');
+		document.getElementById('mutArc' + mb + '_' + 0).classList.add('clickedMR');
 	}else{
 		//nothing
 	}
