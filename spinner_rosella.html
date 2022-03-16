@@ -177,11 +177,11 @@ for(var i=0;i<arrlengthR;i++){
   arrayelementsR[i].classList.remove('clickedMR');
 }
 
-	for(i=1;i<11;i++){
+	for(i=0;i<11;i++){
 		var ss = m.substr(7);
 		
 if(n == 0){
-if(i < 7){
+if(i != 0 && i < 7){
 		document.getElementById(m).classList.add('clickedM');
 		console.log('adding ' + 'mutArc' + i + ss);
 		document.getElementById('mutArc' + i + ss).classList.add('clickedM');
