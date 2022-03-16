@@ -49,6 +49,10 @@
 			color:white;
 			fill:blue;
 		}
+		.clickedMY {
+			color:black;
+			fill:red;
+		}
 		}
 	</style>
   </head>
@@ -221,8 +225,9 @@ for(var i=0;i<arrlength;i++){
 		document.getElementById('mutArc' + i + ss).classList.add('clickedM');
 	}else if(i < 6){
 		document.getElementById(m).classList.add('clickedM'); //FIX make this a different coloured class
-		//console.log('adding ' + 'mutArc' + i + ss);
+		console.log('adding ' + 'mutArc' + i + ss);
 		document.getElementById('mutArc' + mb + '_' + i).classList.add('clickedM');
+		document.getElementById('mutArc' + mb + '_' + 0).classList.add('clickedMY');
 	}else{
 		//nothing
 	}
@@ -253,7 +258,7 @@ for(var i=0;i<arrlength;i++){
 			.attr("fill", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
 			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
 			.attr("d", arc2)
-			.attr("onclick",'setClicked(this.id,1)');;
+			.attr("onclick",'setClicked(this.id,1)');
 			
 			svg.selectAll(".mutArc3")
 			.data(pie(mData))
@@ -262,7 +267,8 @@ for(var i=0;i<arrlength;i++){
 			.attr("id", function(d,i) { return "mutArc3_"+i; })
 			.attr("fill", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
 			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
-			.attr("d", arc3);
+			.attr("d", arc3)
+			.attr("onclick",'setClicked(this.id,1)');
 			
 			svg.selectAll(".mutArc4")
 			.data(pie(mData))
@@ -271,7 +277,8 @@ for(var i=0;i<arrlength;i++){
 			.attr("id", function(d,i) { return "mutArc4_"+i; })
 			.attr("fill", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
 			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
-			.attr("d", arc4);
+			.attr("d", arc4)
+			.attr("onclick",'setClicked(this.id,1)');
 			
 			svg.selectAll(".mutArc5")
 			.data(pie(mData))
@@ -280,7 +287,8 @@ for(var i=0;i<arrlength;i++){
 			.attr("id", function(d,i) { return "mutArc5_"+i; })
 			.attr("fill", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
 			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
-			.attr("d", arc5);
+			.attr("d", arc5)
+			.attr("onclick",'setClicked(this.id,1)');
 			
 			svg.selectAll(".mutArc6")
 			.data(pie(mData))
@@ -289,7 +297,8 @@ for(var i=0;i<arrlength;i++){
 			.attr("id", function(d,i) { return "mutArc6_"+i; })
 			.attr("fill", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
 			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
-			.attr("d", arc6);
+			.attr("d", arc6)
+			.attr("onclick",'setClicked(this.id,1)');
 			
 			svg.selectAll(".mutArc7")
 			.data(pie(mData))
@@ -298,7 +307,8 @@ for(var i=0;i<arrlength;i++){
 			.attr("id", function(d,i) { return "mutArc7_"+i; })
 			.attr("fill", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
 			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
-			.attr("d", arc7);
+			.attr("d", arc7)
+			.attr("onclick",'setClicked(this.id,1)');
 			
 			svg.selectAll(".mutArc8")
 			.data(pie(mData))
@@ -307,7 +317,8 @@ for(var i=0;i<arrlength;i++){
 			.attr("id", function(d,i) { return "mutArc8_"+i; })
 			.attr("fill", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
 			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
-			.attr("d", arc8);
+			.attr("d", arc8)
+			.attr("onclick",'setClicked(this.id,1)');
 			
 			svg.selectAll(".mutArc9")
 			.data(pie(mData))
@@ -316,7 +327,8 @@ for(var i=0;i<arrlength;i++){
 			.attr("id", function(d,i) { return "mutArc9_"+i; })
 			.attr("fill", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
 			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
-			.attr("d", arc9);
+			.attr("d", arc9)
+			.attr("onclick",'setClicked(this.id,1)');
 			
 			svg.selectAll(".mutArc10")
 			.data(pie(mData))
@@ -325,7 +337,8 @@ for(var i=0;i<arrlength;i++){
 			.attr("id", function(d,i) { return "mutArc10_"+i; })
 			.attr("fill", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
 			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
-			.attr("d", arc10);
+			.attr("d", arc10)
+			.attr("onclick",'setClicked(this.id,1)');
 			
 			//FIX merge all of these into a loop
 			svg.selectAll(".mutArc11")
@@ -335,7 +348,8 @@ for(var i=0;i<arrlength;i++){
 			.attr("id", function(d,i) { return "mutArc11_"+i; })
 			.attr("fill", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
 			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
-			.attr("d", arc11);
+			.attr("d", arc11)
+			.attr("onclick",'setClicked(this.id,1)');
 			
 			svg.selectAll(".mutArc12")
 			.data(pie(mData))
@@ -344,7 +358,8 @@ for(var i=0;i<arrlength;i++){
 			.attr("id", function(d,i) { return "mutArc12_"+i; })
 			.attr("fill", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
 			.attr("stroke", function(d,i) { return (i < 6 ? '#AAAAAA' : 'white'); })
-			.attr("d", arc12);
+			.attr("d", arc12)
+			.attr("onclick",'setClicked(this.id,1)');
 			
 			
 			
