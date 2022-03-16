@@ -183,7 +183,7 @@ for(var i=0;i<arrlengthR;i++){
 if(n == 0){
 if(i != 0 && i < 7){
 		document.getElementById(m).classList.add('clickedM');
-		console.log('adding ' + 'mutArc' + i + ss);
+		//console.log('adding ' + 'mutArc' + i + ss);
 		document.getElementById('mutArc' + i + ss).classList.add('clickedM');
 }
 	}else if(i < 11){
@@ -205,7 +205,7 @@ if(i != 0 && i < 7){
 			.data(pie(mData))
 		   .enter().append("path")
 			.attr("class", "mutArc1")
-			.attr("id", function(d,i) { console.log('d ' +d + ', i ' + i);return "mutArc1_"+i; })
+			.attr("id", function(d,i) { /*console.log('d ' +d + ', i ' + i);*/return "mutArc1_"+i; })
 			.attr("fill", function(d,i) { return (i < 11 ? '#404040' : 'black'); })
 			.attr("stroke", function(d,i) { return (i < 11 ? '#AAAAAA' : '#D3D3D3'); }) //FIX add this to next arc ad style appropriately
 			.attr("d", arc1)
@@ -271,7 +271,7 @@ if(i != 0 && i < 7){
 			.attr("dy", 18) //Move the text down
 		   .append("textPath")
 			.attr("xlink:href",function(d,i){return "#mutArc1_"+i;})
-			.attr("id",function(d,i){console.log('id is ' + this);return "t_mutArc1_"+i;})
+			.attr("id",function(d,i){/*console.log('id is ' + this);*/return "t_mutArc1_"+i;})
 			.attr("onclick",'setClicked(this.id,0)')
 			.text(function(d,i){return mutations[i][0];});	
 			
